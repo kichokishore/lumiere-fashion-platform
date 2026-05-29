@@ -16,16 +16,13 @@ const LandingPage = () => {
   useEffect(() => {
     // Show consent modal a short time after loading
     const timer = setTimeout(() => {
-      if (!localStorage.getItem('location_consent_asked')) {
-        setShowConsent(true);
-      }
+      setShowConsent(true);
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
   const handleAllowLocation = () => {
     setShowConsent(false);
-    localStorage.setItem('location_consent_asked', 'true');
     setLoadingLocation(true);
     setDeliveryStatus('Checking nearby delivery availability...');
 
@@ -68,7 +65,6 @@ const LandingPage = () => {
 
   const handleDenyLocation = () => {
     setShowConsent(false);
-    localStorage.setItem('location_consent_asked', 'true');
     setDeliveryStatus('Location access denied. Standard delivery applies.');
   };
 
