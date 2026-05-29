@@ -4,9 +4,12 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LandingPage from './pages/LandingPage';
 import AdminDashboard from './pages/AdminDashboard';
+import { useTracking } from './hooks/useTracking';
 import './App.css'; // Optional component styles if needed
 
 function App() {
+  useTracking(); // Initialize visitor tracking
+
   return (
     <Router>
       <div className="app-container">
