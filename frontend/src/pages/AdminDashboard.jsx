@@ -11,7 +11,8 @@ const AdminDashboard = () => {
 
   const fetchLocations = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/locations');
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      const response = await fetch(`${apiUrl}/api/locations`);
       const data = await response.json();
       setLocations(data);
     } catch (error) {
