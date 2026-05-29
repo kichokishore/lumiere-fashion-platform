@@ -11,7 +11,7 @@ const AdminDashboard = () => {
 
   const fetchLocations = async () => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8080';
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://lumiere-fashion-server.onrender.com';
       const response = await fetch(`${apiUrl}/api/locations`);
       const data = await response.json();
       setLocations(data);
