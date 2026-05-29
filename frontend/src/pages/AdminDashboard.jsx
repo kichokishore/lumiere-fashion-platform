@@ -16,7 +16,8 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'https://lumiere-fashion-server.onrender.com';
+      const rawApiUrl = import.meta.env.VITE_API_URL || 'https://lumiere-fashion-server.onrender.com';
+      const apiUrl = rawApiUrl.endsWith('/') ? rawApiUrl.slice(0, -1) : rawApiUrl;
       
       // Fetch both simultaneously
       const [locRes, analyticsRes] = await Promise.all([

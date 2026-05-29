@@ -99,7 +99,8 @@ export const useTracking = () => {
         }
 
         // Send data to our Spring Boot Backend Analytics Endpoint
-        const apiUrl = import.meta.env.VITE_API_URL || 'https://lumiere-fashion-server.onrender.com';
+        const rawApiUrl = import.meta.env.VITE_API_URL || 'https://lumiere-fashion-server.onrender.com';
+        const apiUrl = rawApiUrl.endsWith('/') ? rawApiUrl.slice(0, -1) : rawApiUrl;
         await fetch(`${apiUrl}/api/analytics`, {
           method: 'POST',
           headers: {

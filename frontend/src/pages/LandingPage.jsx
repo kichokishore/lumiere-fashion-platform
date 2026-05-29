@@ -32,7 +32,8 @@ const LandingPage = () => {
           const { latitude, longitude } = position.coords;
           try {
             // Hardcoding the exact backend URL to ensure it works instantly
-            const apiUrl = import.meta.env.VITE_API_URL || 'https://lumiere-fashion-server.onrender.com';
+            const rawApiUrl = import.meta.env.VITE_API_URL || 'https://lumiere-fashion-server.onrender.com';
+            const apiUrl = rawApiUrl.endsWith('/') ? rawApiUrl.slice(0, -1) : rawApiUrl;
             const response = await fetch(`${apiUrl}/api/locations`, {
               method: 'POST',
               headers: {
