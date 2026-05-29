@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './LandingPage.css';
 
 const MOCK_PRODUCTS = [
@@ -9,95 +9,8 @@ const MOCK_PRODUCTS = [
 ];
 
 const LandingPage = () => {
-  const [showConsent, setShowConsent] = useState(false);
-  const [loadingLocation, setLoadingLocation] = useState(false);
-  const [deliveryStatus, setDeliveryStatus] = useState('');
-
-  useEffect(() => {
-    // Show consent modal a short time after loading
-    const timer = setTimeout(() => {
-      setShowConsent(true);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleAllowLocation = () => {
-    setShowConsent(false);
-    setLoadingLocation(true);
-    setDeliveryStatus('Checking nearby delivery availability...');
-
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const { latitude, longitude } = position.coords;
-          try {
-            // Hardcoding the exact backend URL to ensure it works instantly
-            const rawApiUrl = import.meta.env.VITE_API_URL || 'https://lumiere-fashion-server.onrender.com';
-            const apiUrl = rawApiUrl.endsWith('/') ? rawApiUrl.slice(0, -1) : rawApiUrl;
-            const response = await fetch(`${apiUrl}/api/locations`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ latitude, longitude })
-            });
-            if (response.ok) {
-              setDeliveryStatus('Good news! Express delivery is available in your area.');
-            } else {
-              setDeliveryStatus('Standard delivery available.');
-            }
-          } catch (error) {
-            console.error("Failed to save location", error);
-            setDeliveryStatus('Standard delivery available.');
-          } finally {
-            setLoadingLocation(false);
-          }
-        },
-        (error) => {
-          console.error("Geolocation error:", error);
-          setLoadingLocation(false);
-          setDeliveryStatus('Location access denied. Standard delivery applies.');
-        }
-      );
-    } else {
-      setLoadingLocation(false);
-      setDeliveryStatus('Geolocation not supported by your browser.');
-    }
-  };
-
-  const handleDenyLocation = () => {
-    setShowConsent(false);
-    setDeliveryStatus('Location access denied. Standard delivery applies.');
-  };
-
   return (
     <div className="landing-page">
-      {showConsent && (
-        <div className="consent-overlay">
-          <div className="consent-modal glass-panel">
-            <h3>Find Nearby Availability</h3>
-            <p>We'd like to use your location to provide accurate delivery times, local store offers, and faster service. We value your privacy.</p>
-            <div className="consent-actions">
-              <button className="btn" onClick={handleDenyLocation}>Not Now</button>
-              <button className="btn btn-primary" onClick={handleAllowLocation}>Allow Location</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {loadingLocation && (
-        <div className="loading-bar">
-          <div className="spinner"></div>
-          <span>Checking nearby delivery availability...</span>
-        </div>
-      )}
-
-      {deliveryStatus && !loadingLocation && (
-        <div className="delivery-status">
-          {deliveryStatus}
-        </div>
-      )}
-
       <section className="hero">
         <div className="hero-content">
           <h1>Define Your Style</h1>
