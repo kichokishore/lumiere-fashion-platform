@@ -1,0 +1,122 @@
+.admin-dashboard {
+  padding: 40px 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h2 {
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.dashboard-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+.card {
+  background-color: var(--color-bg-light);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card h3 {
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: var(--color-text-light);
+}
+
+.map-placeholder {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-gray-100);
+  border-radius: var(--radius-sm);
+  color: var(--color-gray-800);
+}
+
+.map-placeholder p {
+  margin-bottom: 10px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
+.data-table th {
+  font-weight: 600;
+  color: var(--color-gray-800);
+  background-color: var(--color-gray-100);
+}
+
+.data-table tr:hover {
+  background-color: rgba(0,0,0,0.02);
+}
+
+.truncate {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px !important;
+  color: var(--color-gray-800);
+  font-style: italic;
+}
+
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.spinner-dark {
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--color-gray-300);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background-color: #1a1a1a;
+    border-color: #333;
+  }
+  .data-table th {
+    background-color: #222;
+    color: var(--color-text-dark);
+  }
+  .data-table td {
+    border-color: #333;
+  }
+  .data-table tr:hover {
+    background-color: rgba(255,255,255,0.02);
+  }
+}
